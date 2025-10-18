@@ -1,0 +1,38 @@
+name: crypto-market-env
+channels:
+  - conda-forge
+  - defaults
+
+dependencies:
+  # ==== Python Core ====
+  - python=3.10
+  - pip
+  - ipykernel            # 方便在 VSCode / Jupyter 使用
+  - pyyaml               # 读取配置文件
+  - requests
+  - cryptography         # 各交易所签名/HMAC
+  - numpy
+  - pandas
+  - tqdm
+  - rich                 # 彩色控制台输出
+  - uvloop               # Linux/MacOS 上加速 asyncio 事件循环
+  - pyopenssl
+
+  # ==== pip packages ====
+  - pip:
+      # --- 交易所 SDKs & WS ---
+      - hyperliquid-python-sdk==0.15.0
+      - ccxt>=4.2.0                     # 通用多交易所 REST 接口（Binance/OKX/Bybit等）
+      - websockets>=11.0.3              # asyncio WebSocket 库
+      - websocket-client>=1.6.1         # 同步 WebSocket 库（备用）
+      - aiohttp>=3.9.0                  # 异步 HTTP 库
+
+      # --- 数据与日志 ---
+      - loguru                         # 强大的日志模块
+      - clickhouse-connect>=0.7.15     # 可选：落库 ClickHouse
+      - pyarrow                        # 用于 Parquet 数据存储
+      - orjson                         # 高性能 JSON 编解码
+
+      # --- 工具类 ---
+      - tenacity                       # 自动重试装饰器（适合REST限流重试）
+      - schedule                       # 定时任务（可选）
